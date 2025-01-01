@@ -4,7 +4,7 @@ const ENCRYPTED_BASE: &str = "src/encrypted_tokens/";
 const SECRET_FILE: &str = "secret.txt";
 const PASSWORD_FILE: &str = "password.txt";
 
-pub const MNEMONIC_LIST: [&str; 22] = [
+pub const MNEMONIC_LIST: [&str; 23] = [
     "BITGET_LITE",
     "BITGET", //0x915C...975A69
     "ECOCHAINLESS",
@@ -27,6 +27,7 @@ pub const MNEMONIC_LIST: [&str; 22] = [
     "TON", // UQBL...rVSE
     "UNISAT",
     "VENOM",
+    "MANGO",
 ];
 
 pub fn get_secret_dir() -> String {
