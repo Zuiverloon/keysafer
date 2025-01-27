@@ -4,7 +4,7 @@ const ENCRYPTED_BASE: &str = "src/encrypted_tokens/";
 const SECRET_FILE: &str = "secret.txt";
 const PASSWORD_FILE: &str = "password.txt";
 
-pub const MNEMONIC_LIST: [&str; 23] = [
+pub const MNEMONIC_LIST: [&str; 24] = [
     "BITGET_LITE",
     "BITGET", //0x915C...975A69
     "ECOCHAINLESS",
@@ -22,6 +22,7 @@ pub const MNEMONIC_LIST: [&str; 23] = [
     "PRE0924",
     "PRE1121",
     "PRE4201",
+    "PREIVE", // solana: ivem...nPNC
     "RAZOR",
     "SUBWALLET",
     "TON", // UQBL...rVSE
