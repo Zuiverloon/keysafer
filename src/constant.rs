@@ -31,6 +31,8 @@ pub const MNEMONIC_LIST: [&str; 24] = [
     "MANGO",
 ];
 
+pub const FILE: [&str; 2] = ["BNWEB3.JPG", "BGWALLETGOOGLEAUTH.PNG"];
+
 pub fn get_secret_dir() -> String {
     format!("{}{}", PLAINTEXT_BASE, SECRET_FILE)
 }
@@ -57,9 +59,9 @@ pub fn get_encrypted_mnemonic_dir(name: &str) -> String {
     get_encrypted_dir(&format!("{}.txt", name))
 }
 
-fn get_plaintext_dir(name: &str) -> String {
+pub fn get_plaintext_dir(name: &str) -> String {
     format!("{}{}", PLAINTEXT_BASE, name)
 }
-fn get_encrypted_dir(name: &str) -> String {
+pub fn get_encrypted_dir(name: &str) -> String {
     format!("{}{}", ENCRYPTED_BASE, name)
 }

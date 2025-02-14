@@ -6,6 +6,7 @@ pub mod constant;
 pub mod file_utils;
 pub mod api;
 pub mod xor_shift_encrypt_utils;
+pub mod file_binary_encrypt_utils;
 
 const PORT: u16 = 8081;
 const HOST: &str = "127.0.0.1";
@@ -62,6 +63,18 @@ async fn encrypt(path: web::Path<(String,)>) -> impl Responder {
     HttpResponse::Ok().body(api::encrypt(&text))
 }
 
+#[get("/keysafer/file/encrypt")]
+async fn file_encrypt_api() -> impl Responder {
+    api::file_encrypt();
+    HttpResponse::Ok().body(OK_4201)
+}
+
+#[get("/keysafer/file/recover")]
+async fn file_recover_api() -> impl Responder {
+    api::file_recover();
+    HttpResponse::Ok().body(OK_4201)
+}
+
 #[actix_web::main]
 async fn main() -> std::io::Result<()> {
     HttpServer::new(|| {
@@ -75,6 +88,8 @@ async fn main() -> std::io::Result<()> {
             .service(mnemonic_recover_api)
             .service(mnemonic_encrypt_api)
             .service(mnemonic_get_api)
+            .service(file_recover_api)
+            .service(file_encrypt_api)
     })
         .bind((HOST, PORT))?
         .run().await
@@ -87,4 +102,7 @@ async fn main() -> std::io::Result<()> {
 //     // api::mnemonic_recover();
 //     // api::get_mnemonic("aas");
 //     // api::get_password()
+
+//     // api::file_encrypt();
+//     api::file_recover();
 // }

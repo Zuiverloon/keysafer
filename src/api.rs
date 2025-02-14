@@ -2,9 +2,19 @@ use crate::secret_utils;
 use crate::crypt_utils;
 use crate::file_utils;
 use crate::constant;
+use crate::file_binary_encrypt_utils;
 
 pub fn get_secret() -> String {
     secret_utils::get_secret()
+}
+
+fn get_secret_number() -> u8 {
+    let key = secret_utils::get_secret();
+    let mut ans = 0;
+    for c in key.chars() {
+        ans += c as i32;
+    }
+    (ans % 255) as u8
 }
 
 pub fn get_password() -> String {
@@ -115,6 +125,30 @@ fn process_recover_mnemonic(name: &str) {
     // println!("{:?}", decrypted_mnemonic_tokens);
 }
 
+fn process_encrypt_file(file_name: &str) {
+    let plaintext_file = constant::get_plaintext_dir(file_name);
+    let encrypted_file = constant::get_encrypted_dir(file_name);
+    // let plaintext_file = constant::PLAINTEXT_BASE + file_name;
+    // let encrypted_file = constant::ENCRYPTED_BASE + file_name;
+    file_binary_encrypt_utils::file_encrypt(&plaintext_file, &encrypted_file, get_secret_number());
+}
+
+fn process_decrypt_file(file_name: &str) {
+    let plaintext_file = constant::get_plaintext_dir(file_name);
+    let encrypted_file = constant::get_encrypted_dir(file_name);
+
+    // let encrypted_file = constant::ENCRYPTED_BASE + file_name;
+    file_binary_encrypt_utils::file_encrypt(&encrypted_file, &plaintext_file, get_secret_number());
+}
+
 fn read_mnemonics_file(id: &str) -> String {
     file_utils::read_file_to_vec(&constant::get_plaintext_mnemonic_dir(id)).join(" ")
+}
+
+pub fn file_encrypt() {
+    constant::FILE.iter().for_each(|file_name| process_encrypt_file(file_name))
+}
+
+pub fn file_recover() {
+    constant::FILE.iter().for_each(|file_name| process_decrypt_file(file_name))
 }

@@ -35,16 +35,23 @@ ZJY
    c. Call `/keysafer/mnemonic/encrypt/` to backup  
    d. Push to Github for remote backup
 
-2. Everytime onboarding a new password, do the following  
+1. Everytime onboarding a new password, do the following  
    a. Add a new line in `src/tokens/password.txt`  
    b. Call `/keysafer/password/encrypt` to backup  
    c. Push to Github for remote backup
 
-3. When pulling from Github, do the following to recover all tokens  
+1. Everytime onboarding a new file, do the following  
+   a. Put file into a new file in `src/tokens/(XXX)`  
+   b. Add the name into constant::FILE and update the length  
+   c. Call `/keysafer/file/encrypt/` to backup  
+   d. Push to Github for remote backup
+
+1. When pulling from Github, do the following to recover all tokens  
    a. Create a new folder `src/tokens`  
    b. Add the secret into `src/tokens/secret.txt`  
    c. Call `/keysafer/password/recover` to recover all passwords  
    d. Call `/keysafer/mnemonic/recover` to recover all mnemonics
+   d. Call `/keysafer/file/recover` to recover all files
 
 ## How to run
 
